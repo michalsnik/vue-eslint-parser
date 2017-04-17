@@ -94,13 +94,16 @@ interface HTMLAttributeValue <: Node {
 ```js
 interface HTMLAttribute <: Node {
     type: "HTMLAttribute"
+    directive: boolean
     key: HTMLIdentifier | HTMLDirectiveKey
     value: HTMLAttributeValue | HTMLExpressionContainer | null
 }
 ```
 
-If the `id` property is a `HTMLIdentifier`, the `value` property is either a `HTMLAttributeValue` node or `null`. Otherwise, the `value` property is either a `HTMLExpressionContainer` node or `null`.
-If the `value` property is `null`, their attribute value does not exist.
+- If the `directive` property is `true`, this is a directive of Vue.js.  
+  In that case, the `id` property is a `HTMLDirectiveKey` node and the `value` property is a `HTMLExpressionContainer` node.
+- Otherwise, the `id` property is a `HTMLIdentifier` node and the `value` property is a `HTMLAttributeValue` node.
+- If the `value` property is `null`, their attribute value does not exist.
 
 ## HTMLStartTag
 
